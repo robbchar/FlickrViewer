@@ -1,1 +1,4 @@
 This is a basic viewer for images in Flickr. Currently it only views my files, I will change that soon.
+
+A note about the Flickr keys, add your own keys to the InitParams in the *.nokeys.* files and rename them removing the '.noKeys' from the filenames to get the app to work.
+ 
