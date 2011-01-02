@@ -49,14 +49,20 @@ namespace FlickrViewer
             {
                 AnimationElements animationElements = Associator.Instance.GetAnimationElements(this.GetUniqueResourceId());
 
+                if (animationElements.Storyboard.Children[0] is DoubleAnimation)
+                {
+                    DoubleAnimation doubleAnimation = animationElements.Storyboard.Children[0] as DoubleAnimation;
+
+                    animationElements.Image.SetValue(Canvas.LeftProperty, doubleAnimation.From);
+                }
+
                 // check to see if the elements have been added to the screen
                 if (this.LayoutRoot.Resources.Contains(animationElements.Image.Name) == false)
                 {
                     this.LayoutRoot.Resources.Add(animationElements.Image.Name, animationElements.Storyboard);
                     this.LayoutRoot.Children.Add(animationElements.Image);
+                    animationElements.Storyboard.Completed += new EventHandler(storyBoard_Completed);
                 }
-
-                animationElements.Storyboard.Completed += new EventHandler(storyBoard_Completed);
 
                 int topMargin = RandomNumber.Next((int)(App.Current.Host.Content.ActualHeight - animationElements.Image.Height));
                 animationElements.Image.Margin = new Thickness(-100, topMargin, 0, 0);
