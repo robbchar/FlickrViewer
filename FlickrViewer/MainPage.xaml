@@ -2,11 +2,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:fv="clr-namespace:FlickrViewer">
+    xmlns:fv="clr-namespace:FlickrViewer"
+    xmlns:cnt="clr-namespace:FlickrViewer.Controls">
 
-    <Canvas x:Name="LayoutRoot" Background="White"  >
-        <StackPanel>
-            
-        </StackPanel>
-    </Canvas>
+    <Grid x:Name="LayoutRoot">
+        <Canvas x:Name="cnvImages" Background="White"  >
+
+        </Canvas>
+        <cnt:PreferencesContainer x:Name="UserPreferences" Background="Black" Width="300" HorizontalAlignment="Right" VerticalAlignment="Top"></cnt:PreferencesContainer>
+    </Grid>
 </UserControl>

@@ -7,11 +7,17 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using FlickrNet;
+using FlickrViewer.Helpers;
+using FlickrViewer.Controls.Preferences;
 
 namespace FlickrViewer
 {
     public partial class MainPage : UserControl
     {
+        #region Fields
+
+        #endregion
+
         #region Properties
 
         public int CurrentImage { get; set; }
@@ -21,6 +27,8 @@ namespace FlickrViewer
         public List<AnimationElements> UnusedAnimationElements { get; set; }
 
         public ObservableCollection<Photo> Photos { get; set; }
+
+        public PreferencesManager PreferencesManager { get; set; }
 
         #endregion
 
@@ -40,7 +48,21 @@ namespace FlickrViewer
 
             this.FlickrManager = new FlickrManager();
             this.FlickrManager.PhotosLoaded += new PhotosLoaded(flickrManager_PhotosLoaded);
-            this.FlickrManager.GetMyPhotos();
+            this.FlickrManager.GetUserPhotos();
+
+            this.PreferencesManager = new PreferencesManager(App.Current.Host.Content.ActualHeight, App.Current.Host.Content.ActualWidth, this.UserPreferences);
+            this.PreferencesManager.PreferenceChanged += new PreferenceControls.PreferenceChanged(PreferencesManager_PreferenceChanged);
+        }
+
+        void PreferencesManager_PreferenceChanged(Controls.Preferences.PreferenceData preferenceData)
+        {
+            if (preferenceData.GetType() == typeof(FlickrUsernameData))
+            {
+                this.Photos = new ObservableCollection<Photo>();
+                this.CurrentImage = 0;
+                this.FlickrManager.FlickrEmail = this.PreferencesManager.CurrentFlickrEmail;
+                this.FlickrManager.GetUserPhotos();
+            }
         }
 
         private void DoImageAnimation()
@@ -60,7 +82,7 @@ namespace FlickrViewer
                 if (this.LayoutRoot.Resources.Contains(animationElements.Image.Name) == false)
                 {
                     this.LayoutRoot.Resources.Add(animationElements.Image.Name, animationElements.Storyboard);
-                    this.LayoutRoot.Children.Add(animationElements.Image);
+                    this.cnvImages.Children.Add(animationElements.Image);
                     animationElements.Storyboard.Completed += new EventHandler(storyBoard_Completed);
                 }
 

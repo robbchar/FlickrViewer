@@ -1,0 +1,19 @@
+﻿<pref:BasePreference x:Class="FlickrViewer.PreferenceControls.FlickrUsername"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pref="clr-namespace:FlickrViewer.PreferenceControls" 
+                     Background="AliceBlue"
+    >
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="55"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Username:" Margin="10,2,0,0" Grid.Column="0"/>
+        <TextBox x:Name="txbUsername" Width="150" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Column="1"/>
+        <Button x:Name="btnSet" Content="Set" Width="45" Margin="10,0,0,0" Grid.Column="2"/>
+    </Grid>
+</pref:BasePreference>

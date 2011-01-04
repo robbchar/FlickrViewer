@@ -76,19 +76,26 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\PreferencesContainer.xaml.cs">
+      <DependentUpon>PreferencesContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Preferences\DataClasses\FlickrUsernameData.cs" />
+    <Compile Include="Controls\Preferences\DataClasses\PreferenceData.cs" />
     <Compile Include="Helpers\AnimationElements.cs" />
     <Compile Include="Helpers\AnimationManager.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Associator.cs" />
+    <Compile Include="Helpers\PreferencesManager.cs" />
     <Compile Include="Helpers\RandomNumber.cs" />
     <Compile Include="Helpers\FlickrManager.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MovingImage.xaml.cs">
-      <DependentUpon>MovingImage.xaml</DependentUpon>
+    <Compile Include="Controls\Preferences\BasePreference.cs" />
+    <Compile Include="Controls\Preferences\FlickrUsername.xaml.cs">
+      <DependentUpon>FlickrUsername.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,11 +104,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\PreferencesContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MovingImage.xaml">
+    <Page Include="Controls\Preferences\FlickrUsername.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +126,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

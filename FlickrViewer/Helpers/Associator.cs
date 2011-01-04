@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Media.Animation;
 using System.Windows;
 
-namespace FlickrViewer
+namespace FlickrViewer.Helpers
 {
     public class Associator
     {

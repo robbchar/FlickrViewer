@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using FlickrNet;
 
-namespace FlickrViewer
+namespace FlickrViewer.Helpers
 {
     public delegate void PhotosLoaded(ObservableCollection<Photo> photos);
 
@@ -11,16 +11,14 @@ namespace FlickrViewer
 
         private const string MY_EMAIL = "robb_c@yahoo.com";
 
-        //string apikey = "e672ac2d357f585caf7becc855930c6e";
-
-        //string secretkey = "e7280dd2de699681";
-
         public event PhotosLoaded PhotosLoaded;
 
         #endregion
 
         #region Properties
 
+        public string FlickrEmail { get; set; }
+        
         public Flickr FlickrInstance { get; set; }
 
         public int CurrentPage { get; set; }
@@ -35,22 +33,19 @@ namespace FlickrViewer
 
         public FlickrManager()
         {
+            this.FlickrEmail = MY_EMAIL;
+
             this.FlickrInstance = new Flickr(App.Current.Resources["flickrApiKey"].ToString(), App.Current.Resources["flickrSecretKey"].ToString());
         }
 
-        public void GetMyPhotos()
+        public void GetUserPhotos()
         {
-            this.LoadMyFlickerImages();
+            this.LoadUserFlickerImages();
         }
 
         public void GetNextPage()
         {
             this.GetFoundUserImages();
-        }
-
-        public void GetPhotos()
-        {
-            this.LoadFlickerImages();
         }
 
         private void LoadFlickerImages()
@@ -73,11 +68,11 @@ namespace FlickrViewer
             });
         }
 
-        private void LoadMyFlickerImages()
+        private void LoadUserFlickerImages()
         {
             this.CurrentPage = 1;
 
-            this.FlickrInstance.PeopleFindByEmailAsync(MY_EMAIL,
+            this.FlickrInstance.PeopleFindByEmailAsync(this.FlickrEmail,
                 result =>
             {
                 if (result.HasError)
